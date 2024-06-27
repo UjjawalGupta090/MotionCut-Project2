@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.8.1/font/bootstrap-icons.min.css" rel="stylesheet">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f8f9fa;
+        }
+        .card {
+            width: 100%;
+            max-width: 400px;
+        }
+        .error {
+            color: red;
+            font-size: 0.875em;
+            margin-top: -0.5em;
+            margin-bottom: 1em;
+        }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <div class="card-body">
+        <h5 class="card-title text-center">Register</h5>
+        <form id="registrationForm" novalidate>
+            <div class="form-group">
+                <label for="username">Username <i class="bi bi-person"></i></label>
+                <input type="text" class="form-control" id="username" name="username" required>
+                <div class="error" id="usernameError"></div>
+            </div>
+            <div class="form-group">
+                <label for="email">Email <i class="bi bi-envelope"></i></label>
+                <input type="email" class="form-control" id="email" name="email" required>
+                <div class="error" id="emailError"></div>
+            </div>
+            <div class="form-group">
+                <label for="password">Password <i class="bi bi-lock"></i></label>
+                <input type="password" class="form-control" id="password" name="password" required>
+                <div class="error" id="passwordError"></div>
+            </div>
+            <button type="submit" class="btn btn-primary btn-block">Submit</button>
+        </form>
+    </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script>
+    document.getElementById('registrationForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        let valid = true;
+
+        // Clear previous errors
+        document.getElementById('usernameError').textContent = '';
+        document.getElementById('emailError').textContent = '';
+        document.getElementById('passwordError').textContent = '';
+
+        // Validate username
+        const username = document.getElementById('username').value;
+        if (username.length < 3) {
+            document.getElementById('usernameError').textContent = 'Username must be at least 3 characters long.';
+            valid = false;
+        }
+
+        // Validate email
+        const email = document.getElementById('email').value;
+        const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+        if (!emailPattern.test(email)) {
+            document.getElementById('emailError').textContent = 'Please enter a valid email address.';
+            valid = false;
+        }
+
+        // Validate password
+        const password = document.getElementById('password').value;
+        if (password.length < 6) {
+            document.getElementById('passwordError').textContent = 'Password must be at least 6 characters long.';
+            valid = false;
+        }
+
+        // If valid, submit the form (for demonstration purposes, just show an alert)
+        if (valid) {
+            alert('Form submitted successfully!');
+        }
+    });
+</script>
+</body>
+</html>
